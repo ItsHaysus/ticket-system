@@ -1,0 +1,106 @@
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#container {
+    min-height:100%;
+    position:relative;
+}
+#header {
+    background:#DB350F;
+    padding:10px;
+}
+#body {
+    background-color: whitesmoke;
+    font-family: Bahnschrift;
+    color: rgb(74,74,74);
+    padding:10px;
+    padding-bottom:60px;
+    font-size: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* iphone 5 */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (-webkit-device-pixel-ratio: 2) { }
+
+/* iphone 6, 6s, 7, 8 */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+    #body {
+        font-size: 10px;
+    }
+}
+/* iphone 6+, 6s+, 7+, 8+ */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+    #body {
+        font-size: 10px;
+        width: 100%;
+    }
+}
+
+/* iphone X */
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    #body {
+        padding:10px;
+        padding-bottom:60px;
+        font-size: 15px;
+        background-color: whitesmoke;
+        font-family: Bahnschrift;
+        color: rgb(74,74,74);
+        width: 100%;
+    }
+}
+
+/* iphone XR */
+@media only screen and (min-device-width : 414px) and (max-device-height : 896px) and (-webkit-device-pixel-ratio : 2) { }
+
+/* iphone XS */
+@media only screen and (min-device-width : 375px) and (max-device-height : 812px) and (-webkit-device-pixel-ratio : 3) { }
+
+/* iphone XS Max */
+@media only screen and (min-device-width : 414px) and (max-device-height : 896px) and (-webkit-device-pixel-ratio : 3) { }
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+    background:#DB350F;
+}
+a{
+    color:#DB350F; /*varies from #CF4411 because of G!*# contrast ratio 3:1 needed for diffrerentiation between color text and surrounding text - WCAG 2.0 - EA: last color was #f05023, which didnt seem to work*/
+    text-decoration:none;
+    font-weight: 500;
+}
+.error {color: #FF0000;}
+.success{color: #00FF00;}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#example {
+    border-collapse: collapse;
+}
+#example tr {
+    background-color: #eee;
+    border-top: 1px solid #fff;
+}
+#example tr:hover {
+    background-color: #ccc;
+}
+#example th {
+    background-color: #fff;
+}
+#example th, #example td {
+    padding: 3px 5px;
+}
+#example td:hover {
+    cursor: pointer;
+}
