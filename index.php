@@ -13,6 +13,7 @@
 $nameErr = $emailErr = $subjectErr = $categoryErr = $priorityErr  =$success="";
 $name = $email = $Subject = $Description = $category = $priority = "";
 $status = "Not Started";
+$assigned = "None";
 $check1 =$check2=$check3=$check4=$check5=$check6 = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -62,13 +63,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check6 = true;
     }
     if ($check1 == true && $check2 == true && $check3 == true && $check4 == true && $check5 == true && $check6 == true) {
-        UploadFiles($name, $email, $Subject, $Description, $category, $priority, $status);
+        UploadFiles($name, $email, $Subject, $Description, $category, $priority, $status,$assigned);
         $success = "Ticket Successfully Created";
         sendMail();
     }
 }
 
-function UploadFiles($name1,$email1,$subject1,$description1,$category,$priority,$status)
+function UploadFiles($name1,$email1,$subject1,$description1,$category,$priority,$status,$assigned1)
 {
     $servername = "localhost";
     $username = "id8499309_jesus";
@@ -80,7 +81,7 @@ function UploadFiles($name1,$email1,$subject1,$description1,$category,$priority,
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = ("INSERT INTO `tickets`(`TicketFrom`, `TicketFromEmail`, `ticketName`, `ticketMessege`, `ticketStatus`, `ticketCategory`, `ticketPriority`) VALUES ('$name1','$email1','$subject1','$description1','$status','$category','$priority')");
+    $sql = ("INSERT INTO `tickets`(`TicketFrom`, `TicketFromEmail`, `ticketName`, `ticketMessege`, `ticketStatus`, `ticketCategory`, `ticketPriority`,ticketAssign) VALUES ('$name1','$email1','$subject1','$description1','$status','$category','$priority','$assigned1')");
     if ($conn->query($sql) === TRUE) {
         $success = "Ticket created successfully";
     } else {
@@ -93,7 +94,7 @@ function sendMail(){
     $yourname = check_input($_POST['Name']);
     $email    = check_input($_POST['Email']);
     $message  = check_input($_POST["Description"]);
-    $subject = check_input($_POST['Subject']);
+    $subject1 = check_input($_POST['Subject']);
 
     $myemail  = "jesus.a.sanchez01@utrgv.edu,$email";
 
@@ -102,15 +103,19 @@ function sendMail(){
         show_error("E-mail address not valid");
     }
 
-    $subject ="New Ticket: ". $subject;
-    $content = "Hello! 
-A New Ticket has been submitted by $yourname
-
-
-Description:
-$message
-";
+    $subject ="New Ticket: ". $subject1;
+    $content = "
+    <div>
+        <h1 style='background-color: #DB350F;margin:0;'>A New Ticket Has Been Created</h1>
+        <div style='background-color: whitesmoke;margin:0;'>
+        <h2 style='margin:0;'>Created By: <p style='color: blue'>$yourname</p></h2> 
+        <h2>Subject: $subject1</h2>
+        <h2>Details:<pre> wordwrap($message,70)</pre></h2>
+        </div>
+    </div>";
     $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
 
     $headers .= 'From: <Systems@DONOTREPLY.com>' . "\r\n";
 

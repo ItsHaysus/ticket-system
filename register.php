@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (username, password, isAdmin) VALUES (?, ?,'1')";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -96,40 +96,52 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>UTRGV Ticket System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style><?php include 'styles.css'?></style>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-    </style>
 </head>
 <body>
-<div class="wrapper">
-    <h2>Sign Up</h2>
-    <p>Please fill this form to create an account.</p>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-            <span class="help-block"><?php echo $username_err; ?></span>
-        </div>
-        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-            <span class="help-block"><?php echo $password_err; ?></span>
-        </div>
-        <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-            <label>Confirm Password</label>
-            <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-            <span class="help-block"><?php echo $confirm_password_err; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Submit">
-            <input type="reset" class="btn btn-default" value="Reset">
-        </div>
-        <p>Already have an account? <a href="login.php">Login here</a>.</p>
-    </form>
+<div id="container">
+    <div id="header" class="text-center well utrgv">
+        <header>
+            <h1>Library Help Desk Tickets</h1>
+            <a href="login.php" class="btn btn-success">Log in to manage tickets</a>
+        </header>
+    </div>
+    <div id="body">
+        <p>Please fill this form to create an account.</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+                <span class="help-block"><?php echo $password_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
+                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-default" value="Reset">
+            </div>
+            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+        </form>
+    </div>
+    <div id="footer" class="well text-center">
+        <footer>
+
+        </footer>
+    </div>
 </div>
 </body>
 </html>

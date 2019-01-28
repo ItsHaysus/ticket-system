@@ -13,7 +13,6 @@ body {
     padding:10px;
 }
 #body {
-    background-color: whitesmoke;
     font-family: Bahnschrift;
     color: rgb(74,74,74);
     padding:10px;
@@ -53,13 +52,6 @@ body {
         width: 100%;
     }
 }
-
-/* iphone XR */
-@media only screen and (min-device-width : 414px) and (max-device-height : 896px) and (-webkit-device-pixel-ratio : 2) { }
-
-/* iphone XS */
-@media only screen and (min-device-width : 375px) and (max-device-height : 812px) and (-webkit-device-pixel-ratio : 3) { }
-
 /* iphone XS Max */
 @media only screen and (min-device-width : 414px) and (max-device-height : 896px) and (-webkit-device-pixel-ratio : 3) { }
 #footer {
@@ -103,4 +95,10 @@ table#example {
 }
 #example td:hover {
     cursor: pointer;
+}
+pre {
+    font-size: 16px;
+    font-family: Bahnschrift;
+    border-color: slategrey;
+    background-color: white;
 }

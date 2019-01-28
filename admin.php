@@ -10,9 +10,9 @@
         $(document).ready(function() {
 
             $('#example tr').click(function() {
-                var href = $(this).find("a").attr("href");
+                let href = $(this).find("a").attr("href");
                 if(href) {
-                    window.location = href;
+                    window.location = href+"?id="+idVar;
                 }
             });
 
@@ -61,27 +61,33 @@ $numofTickets = mysqli_num_rows($result);
         </header>
     </div>
 
-    <div id="body" class="center">
-        <table id="example">
-            <tr><th></th>
+    <div id="body" style="overflow-x:auto;" class="well container-fluid">
+        <table id="example" align="center" role="table">
+            <thead role="rowgroup">
+            <tr role="row">
+                <th></th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Subject</th>
                 <th>Status</th>
                 <th>Category</th>
             </tr>
-                <?php
+            </thead>
+            <?php
                 if($result = mysqli_query($link, $sql)){
                     if(mysqli_num_rows($result) > 0){;
                         while($row = mysqli_fetch_array($result)){
-                            echo "<tr>";
-                            echo "<td><a href='ticketedit.php'>Edit</a></td>";
-                            echo "<td>" . $row['ticketID'] . "</td>";
+                            echo "<tbody role='rowgroup'>";
+                            echo "<tr role='row'>";
+                            $var = "?id=".$row['ticketID'];
+                            echo "<td><a href='ticketedit.php$var'>Edit</a></td>";
+                            echo "<td id='id'>" . $row['ticketID'] . "</td>";
                             echo "<td>" . $row['TicketFrom'] . "</td>";
                             echo "<td>" . $row['ticketName'] . "</td>";
                             echo "<td>" . $row['ticketStatus'] . "</td>";
                             echo "<td>" . $row['ticketCategory'] . "</td>";
                             echo "</tr>";
+                            echo "</tbody>";
                         }
                         mysqli_free_result($result);
                     } else{
